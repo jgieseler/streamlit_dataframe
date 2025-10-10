@@ -16,18 +16,21 @@ st.set_page_config(
 
 df = pd.read_csv('sep-sc25.csv', sep=';')
 
+col1, col2, col3, col4, col5 = st.columns(5)
+
+
 sc = {}
-sc['BepiC'] = st.checkbox("BepiColombo", value=True)
-sc['L1'] = st.checkbox("L1 (SOHO/Wind)", value=True)
-sc['PSP'] = st.checkbox("Parker Solar Probe", value=True)
-sc['STA'] = st.checkbox("STEREO A", value=True)
-sc['SolO'] = st.checkbox("Solar Orbiter", value=True)
+sc['BepiC'] = col1.checkbox("BepiColombo", value=True)
+sc['L1'] = col2.checkbox("L1 (SOHO/Wind)", value=True)
+sc['PSP'] = col3.checkbox("Parker Solar Probe", value=True)
+sc['STA'] = col4.checkbox("STEREO A", value=True)
+sc['SolO'] = col5.checkbox("Solar Orbiter", value=True)
 
 for key, value in sc.items():
     if not value:
         df.drop(df.filter(like=f'{key}_',axis=1).columns.to_list(), axis=1, inplace=True)
 
-AgGrid(df)
+AgGrid(df, show_toolbar=True, height=700)
 
 # st.dataframe(df, height=700)
 # st.markdown("See [this documentation](https://docs.streamlit.io/develop/concepts/design/dataframes#stdataframe-ui-features) for what can be done with the table above.")
