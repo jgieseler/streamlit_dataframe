@@ -31,11 +31,9 @@ for key, value in sc.items():
         df.drop(df.filter(like=f'{key}_',axis=1).columns.to_list(), axis=1, inplace=True)
 
 gb = GridOptionsBuilder.from_dataframe(df)
-# gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-dd HH:mm zzz')
-gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-dd')
+gb.configure_column("# id", header_name='Event ID')  # TODO: not working?
+# gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-dd')
 # gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-ddTHH:mm:ZZZ')
-
-gb = GridOptionsBuilder.from_dataframe(df)
 gridOptions = gb.build()
 
 AgGrid(df, show_toolbar=True, height=700, gridOptions=gridOptions)
