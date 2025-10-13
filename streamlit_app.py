@@ -81,7 +81,17 @@ gridOptions["tooltipShowDelay"] = 500
 
 grid = AgGrid(df, show_toolbar=True, height=700, gridOptions=gridOptions, 
               updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
-              allow_unsafe_jscode=True)
+              allow_unsafe_jscode=True,
+            #   theme='streamlit',
+            #   theme='light',
+            #   theme='dark',
+            #   theme='blue',
+            #   theme='fresh',
+            #   theme='material',
+            #   fit_columns_on_grid_load=True,
+              )
+
+
 
 # st.dataframe(df, height=700)
 # st.markdown("See [this documentation](https://docs.streamlit.io/develop/concepts/design/dataframes#stdataframe-ui-features) for what can be done with the table above.")
