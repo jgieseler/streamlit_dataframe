@@ -37,16 +37,18 @@ for key, value in sc.items():
 
 gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_column("# id", header_name='Event ID')
-gb.configure_column("science_case", header_name='Science Case')
+gb.configure_column("science_case", header_name='Science Case', tooltipField='science_case', headerTooltip='Science case category', width=10)
+gb.configure_column("flare_comments", header_name='Flare Comments', tooltipField='flare_comments', headerTooltip='Comments about flares', width=10)
+
 gb.configure_column(
     "solar_mach_link",
     headerName="Solar-MACH",
-    width=100,
+    # width=100,
     cellRenderer=JsCode("""
         class UrlCellRenderer {
           init(params) {
             this.eGui = document.createElement('a');
-            this.eGui.innerText = 'Open link';
+            this.eGui.innerText = params.value;
             this.eGui.setAttribute('href', params.value);
             this.eGui.setAttribute('style', "text-decoration:none");
             this.eGui.setAttribute('target', "_blank");
@@ -58,22 +60,28 @@ gb.configure_column(
     """)
 )
 
+
+
 # gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-dd')
 # gb.configure_column("date", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-ddTHH:mm:ZZZ')
 
 # gb.configure_pagination(enabled=True, paginationAutoPageSize=False,paginationPageSize=20)
-gb.configure_default_column(groupable=True, value=True, enableRowGroup=True, aggFunc="sum", editable=True)
-gb.configure_side_bar()
-# gb.configure_side_bar(filters_panel=True, columns_panel=True, defaultToolPanel='filters')  # TODO: not working?
+gb.configure_side_bar()  # TODO: not working?
 # gb.configure_default_column(filter=True, groupable=True, value=True, enableRowGroup=True, aggFunc="sum")
 
 gridOptions = gb.build()
+# gridOptions['pagination'] = True
+# gridOptions['paginationPageSize'] = 20    
+gridOptions['sideBar'] = True  # TODO: not working?
+# gridOptions['defaultColDef'] = {"filter": True, "groupable": True, "value": True, "enableRowGroup": True, "aggFunc": "sum"}
+gridOptions['rowSelection'] = 'multiple'  # 'single'
+gridOptions["tooltipShowDelay"] = 500
 
-grid = AgGrid(df, show_toolbar=True, height=700, gridOptions=gridOptions, updateMode=GridUpdateMode.VALUE_CHANGED, allow_unsafe_jscode=True)
+
+
+grid = AgGrid(df, show_toolbar=True, height=700, gridOptions=gridOptions, 
+              updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
+              allow_unsafe_jscode=True)
 
 # st.dataframe(df, height=700)
 # st.markdown("See [this documentation](https://docs.streamlit.io/develop/concepts/design/dataframes#stdataframe-ui-features) for what can be done with the table above.")
-
-
-
-
