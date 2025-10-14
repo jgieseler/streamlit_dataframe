@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, StAggridTheme
 from st_aggrid.shared import JsCode
 
 st.set_page_config(
@@ -78,18 +78,26 @@ gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 
 
+available_themes = ["streamlit", "light", "dark", "blue", "fresh", "material", "quartz",  "alpine"]
+selected_theme = st.selectbox("Theme", available_themes)
+
+
+# custom_theme = (
+#     StAggridTheme(base="quartz")
+#     .withParams(fontSize=20)
+#     .withParts("iconSetAlpine", "colorSchemeDark")
+# )
+
+
 
 grid = AgGrid(df, show_toolbar=True, height=700, gridOptions=gridOptions, 
               updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
               allow_unsafe_jscode=True,
-            #   theme='streamlit',
-            #   theme='light',
-            #   theme='dark',
-            #   theme='blue',
-            #   theme='fresh',
-            #   theme='material',
             #   fit_columns_on_grid_load=True,
+              theme=selected_theme,
+              key="table",
               )
+
 
 
 
