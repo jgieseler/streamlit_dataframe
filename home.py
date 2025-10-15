@@ -10,7 +10,7 @@ st.write('Select the catalogue you want to explore from the top navigation bar.'
 st.write('Open the sidebar (">>" in the top left) for options.')
 
 st.markdown("""
-            ### Acknowledgement
+            #### Acknowledgement
 
             <img align="right" height="80px" src="https://github.com/user-attachments/assets/28c60e00-85b4-4cf3-a422-6f0524c42234" alt="EU flag">
             <img align="right" height="80px" src="https://github.com/user-attachments/assets/5bec543a-5d80-4083-9357-f11bc4b339bd" alt="SOLER logo">
