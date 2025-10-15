@@ -9,6 +9,9 @@ t_df = pd.read_csv('catalogues/full_catalog_with_stix_merged_with_cme.csv', sep=
 time_columns = [col for col in t_df.columns if 'time' in col]
 df_stix = pd.read_csv('catalogues/full_catalog_with_stix_merged_with_cme.csv', sep=',', parse_dates=time_columns)
 
+st.multiselect("Select columns to display (by default all are active).", options=df_stix.keys(), default=df_stix.keys(), key='selected_columns_2')
+df_stix = df_stix[st.session_state.selected_columns_2]
+
 gb = GridOptionsBuilder.from_dataframe(df_stix)
 # gb.configure_column("# id", header_name='Event ID')
 for key in df_stix.keys():

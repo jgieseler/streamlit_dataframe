@@ -20,9 +20,13 @@ df_cme = pd.read_csv('catalogues/full_catalog_cme_merged_with_flares_and_weak_fl
 # sc['STA'] = col4.checkbox("STEREO A", value=True)
 # sc['SolO'] = col5.checkbox("Solar Orbiter", value=True)
 
-# for key, value in sc.items():
+
+st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
+df_cme = df_cme[st.session_state.selected_columns_1]
+
+# for key, value in column.items():
 #     if not value:
-#         df_cme.drop(df_cme.filter(like=f'{key}_',axis=1).columns.to_list(), axis=1, inplace=True)
+        # df_cme.drop(df_cme.filter(like=f'{key}_',axis=1).columns.to_list(), axis=1, inplace=True)
 
 gb = GridOptionsBuilder.from_dataframe(df_cme)
 for key in df_cme.keys():
@@ -34,16 +38,17 @@ for key in df_cme.keys():
 # gb.configure_column("event_time", type=["customDateTimeFormat"], custom_format_string='yyyy-MM-ddTHH:mm:ZZZ')
 
 # gb.configure_pagination(enabled=True, paginationAutoPageSize=False,paginationPageSize=20)
-gb.configure_side_bar()  # TODO: not working?
+# gb.configure_side_bar()  # TODO: not working?
 # gb.configure_default_column(filter=True, groupable=True, value=True, enableRowGroup=True, aggFunc="sum")
 
 gridOptions = gb.build()
 # gridOptions['pagination'] = True
 # gridOptions['paginationPageSize'] = 20    
-gridOptions['sideBar'] = True  # TODO: not working?
+# gridOptions['sideBar'] = True  # TODO: not working?
 # gridOptions['defaultColDef'] = {"filter": True, "groupable": True, "value": True, "enableRowGroup": True, "aggFunc": "sum"}
 gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
+gridOptions['toolbarPosition'] = 'bottom'
 
 # custom_theme = (
 #     StAggridTheme(base="quartz")
