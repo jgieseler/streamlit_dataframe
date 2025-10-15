@@ -12,6 +12,8 @@ st.set_page_config(
     # }
 )
 
+st.logo("soler.png", size='large')
+
 st.session_state.fit_columns_on_grid_load = False
 
 available_themes = ["streamlit", "light", "dark", "blue", "fresh", "material", "quartz",  "alpine"]
