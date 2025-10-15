@@ -8,6 +8,10 @@ st.title("full_catalog_cme_merged_with_flares_and_weak_flares")
 df_cme = pd.read_csv('catalogues/full_catalog_cme_merged_with_flares_and_weak_flares.csv', sep=',',
                     parse_dates=['event_time', 'Start time (1 AU)', 'Start time (Sun)'])
 
+# remove asterix (*) from columns
+# for col in ['Acceleration', 'Mass', 'Kinetic Energy']:
+#   df_cme[col] = df_cme[col].str.replace('*', '').astype(float)
+
 # col1, col2, col3, col4, col5 = st.columns(5)
 # sc = {}
 # sc['BepiC'] = col1.checkbox("BepiColombo", value=True)
