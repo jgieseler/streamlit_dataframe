@@ -5,7 +5,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridThem
 
 st.title("full_catalog_cme_merged_with_flares_and_weak_flares")
 
-df_cme = pd.read_csv('full_catalog_cme_merged_with_flares_and_weak_flares.csv', sep=',',
+df_cme = pd.read_csv('catalogues/full_catalog_cme_merged_with_flares_and_weak_flares.csv', sep=',',
                     parse_dates=['event_time', 'Start time (1 AU)', 'Start time (Sun)'])
 
 # col1, col2, col3, col4, col5 = st.columns(5)
