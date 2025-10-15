@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="SOLER Catalogues",
-    page_icon="☀️",  # 🔆
+    page_icon="SOLER_Favicon-150x150.png",  # "☀️",  # 🔆
     layout="wide",
     initial_sidebar_state="collapsed",
     # menu_items={
