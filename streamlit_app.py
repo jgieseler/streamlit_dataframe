@@ -1,5 +1,7 @@
 import streamlit as st
 
+
+
 st.set_page_config(
     page_title="SOLER Catalogues",
     page_icon="SOLER_Favicon-150x150.png",  # "☀️",  # 🔆
@@ -12,7 +14,8 @@ st.set_page_config(
     # }
 )
 
-st.logo("soler.png", size='large')
+
+# st.logo("soler.png", size='large')
 
 st.session_state.fit_columns_on_grid_load = False
 
@@ -26,3 +29,25 @@ pages = [st.Page("home.py", title="Home"),
 
 pg = st.navigation(pages, position="top")
 pg.run()
+
+
+st.markdown(
+    """
+        <style>
+                .stMainBlockContainer {
+                    # padding-left: 0rem;
+                    # padding-right: 0rem;
+                    padding-top: 4rem;
+                    padding-bottom: 0rem;
+                }
+                # .stAppHeader {
+                #     background-color: rgba(255, 255, 255, 0.0);
+                #     visibility: visible;
+                # }
+                # [data-testid = "stSidebarHeader"] {
+                #     height: 2rem; /* 2rem keeps just enough space for the icon*/
+                # }
+        </style>
+        """,
+    unsafe_allow_html=True,
+)
