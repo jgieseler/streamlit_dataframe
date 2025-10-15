@@ -38,9 +38,41 @@ gb.configure_column(
 # gb.configure_grid_options(onCellDoubleClicked=onCellDoubleClickedHandler)
 # gb.configure_grid_options(onCellClicked=onCellDoubleClickedHandler)
 
+# Make NaT values invisible without removing them
+cell_stylejscode = JsCode("""
+    function(params) {
+        console.log(params.value);
+        if (params.value === 'NaT') {
+            return {
+                'color':'rgb(0, 0, 0, 0.0)',
+                /// 'backgroundColor':'white'
+            }
+        }
+};
+""")
+gb.configure_columns(column_names=time_columns, cellStyle = cell_stylejscode)
+
+
 gridOptions = gb.build() 
 gridOptions['rowSelection'] = 'multiple'  # 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
+
+# Colour rows where STIX start time is NaT
+# jscode2 = JsCode("""
+# function(params) {
+#     if (params.data.event_start_time_stix === 'NaT') {
+#         return {
+#             'color': 'green',
+#             'backgroundColor': 'orange'
+#         }
+#     }
+# };
+# """)
+# gridOptions['getRowStyle'] = jscode2
+
+
+
+
 
 # gridOptions["columnDefs"].append(
 #     {
