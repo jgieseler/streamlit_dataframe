@@ -22,7 +22,7 @@ st.session_state.fit_columns_on_grid_load = False
 available_themes = ["streamlit", "light", "dark", "blue", "fresh", "material", "quartz",  "alpine"]
 selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_theme')
 
-st.sidebar.write(st.session_state)
+# st.sidebar.write(st.session_state)
 
 pages = [st.Page("pages/home.py", title="Home"),
          st.Page("pages/catalogue_1.py", title="CME_catalog"),
