@@ -3,9 +3,11 @@ import streamlit as st
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
 # from st_aggrid.shared import JsCode
 
-st.title("full_catalog_cme_merged_with_flares_and_weak_flares")
+fname = 'full_catalog_cme_merged_with_flares_and_weak_flares'
 
-df_cme = pd.read_csv('catalogues/full_catalog_cme_merged_with_flares_and_weak_flares.csv', sep=',',
+st.title(fname)
+
+df_cme = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
                     parse_dates=['event_time', 'Start time (1 AU)', 'Start time (Sun)'])
 
 # remove asterix (*) from columns
