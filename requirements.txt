@@ -1,3 +1,4 @@
 pandas
+pooch
 streamlit
 streamlit-aggrid

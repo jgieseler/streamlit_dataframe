@@ -3,16 +3,19 @@ import streamlit as st
 from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
 # from st_aggrid.shared import JsCode
 
-fname = 'full_catalog_cme_merged_with_flares_and_weak_flares'
+
+
+
+fname = 'CME_catalog'  # 'full_catalog_cme_merged_with_flares_and_weak_flares'
 
 st.title(fname)
 
-df_cme = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
-                    parse_dates=['event_time', 'Start time (1 AU)', 'Start time (Sun)'])
+df_cme_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
+                    parse_dates=['Start Time (Observer)', 'Start time (1 AU)', 'Start time (Sun)'])
 
 # remove asterix (*) from columns
 # for col in ['Acceleration', 'Mass', 'Kinetic Energy']:
-#   df_cme[col] = df_cme[col].str.replace('*', '').astype(float)
+#   df_cme_org[col] = df_cme_org[col].str.replace('*', '').astype(float)
 
 # col1, col2, col3, col4, col5 = st.columns(5)
 # sc = {}
@@ -22,9 +25,21 @@ df_cme = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
 # sc['STA'] = col4.checkbox("STEREO A", value=True)
 # sc['SolO'] = col5.checkbox("Solar Orbiter", value=True)
 
+def store_value(my_key):
+    # Copy the value to the permanent key
+    st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
-st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
-df_cme = df_cme[st.session_state.selected_columns_1]
+if 'selected_columns_1' in st.session_state:
+  default_keys = st.session_state.selected_columns_1
+else:
+  default_keys = df_cme_org.keys()
+
+st.multiselect("Select columns to display (by default all are active).", options=df_cme_org.keys(), default=default_keys, key='_selected_columns_1', on_change=store_value, args=["selected_columns_1"])
+# st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
+if 'selected_columns_1' in st.session_state:
+  df_cme = df_cme_org[st.session_state.selected_columns_1]
+else:
+  df_cme = df_cme_org
 
 # for key, value in column.items():
 #     if not value:

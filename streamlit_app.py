@@ -1,7 +1,5 @@
 import streamlit as st
 
-
-
 st.set_page_config(
     page_title="SOLER Catalogues",
     page_icon="images/SOLER_Favicon-150x150.png",  # "☀️",  # 🔆
@@ -13,18 +11,22 @@ st.set_page_config(
     #     'About': "# This is a header. This is an *extremely* cool app!"
     # }
 )
-
-
 # st.logo("images/soler.png", size='large')
+
+# for my_key in ["selected_columns_1", "selected_columns_2"]:
+#     if my_key in st.session_state:
+#         st.session_state[my_key] = st.session_state[my_key]
 
 st.session_state.fit_columns_on_grid_load = False
 
 available_themes = ["streamlit", "light", "dark", "blue", "fresh", "material", "quartz",  "alpine"]
 selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_theme')
 
+st.sidebar.write(st.session_state)
+
 pages = [st.Page("pages/home.py", title="Home"),
-         st.Page("pages/catalogue_1.py", title="full_catalog_cme_merged_with_flares_and_weak_flares"),
-         st.Page("pages/catalogue_2.py", title="full_catalog_with_stix_merged_with_cme"),
+         st.Page("pages/catalogue_1.py", title="CME_catalog"),
+         st.Page("pages/catalogue_2.py", title="Flare_catalog"),
         ]
 
 pg = st.navigation(pages, position="top")
