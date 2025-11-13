@@ -136,7 +136,6 @@ sleep(0.01)
 #   pass
 
 
-
 with details_container:
     with st.container(border=True):
       if (type(grid2['selected_rows']).__name__ == "NoneType"):
@@ -144,28 +143,9 @@ with details_container:
       else:
         st.write(grid2['selected_rows'])
         for crocs_link in grid2['selected_rows']['IP Radio Bursts'].values:
-          with st.spinner("Loading figure...", show_time=True):
-            # response = requests.get(crocs_link, stream=True)
-            # response = urllib.request.urlopen(url)
-            # with open('san_francisco.jpg', 'wb') as out_file:
-            #   shutil.copyfileobj(response.raw, out_file)
-            # del response
+          with st.spinner("Downloading figure...", show_time=True):
             fig = pooch.retrieve(url=crocs_link, known_hash=None, progressbar=False)
             st.image(fig)
             # st.image(crocs_link)
         # st.image(grid2['selected_rows']['IP Radio Bursts'].values[0])
         st.write('Plots obtained from https://parker.gsfc.nasa.gov/crocs.html')
-
-
-# def download_and_show_image(url):
-#     import requests
-#     import shutil
-
-#     response = requests.get(url, stream=True)
-
-#     # Save the image
-#     with open('san_francisco.jpg', 'wb') as out_file:
-#         shutil.copyfileobj(response.raw, out_file)
-
-#     del response
-#     st.image('san_francisco.jpg')
