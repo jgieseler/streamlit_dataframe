@@ -69,6 +69,8 @@ gridOptions['toolbarPosition'] = 'bottom'
 # gridOptions['suppressColumnVirtualisation'] = True
 if st.session_state.fitCellContents:
   gridOptions['autoSizeStrategy'] = 'fitCellContents'
+else:
+  gridOptions['autoSizeStrategy'] = None
 
 
 # custom_theme = (
