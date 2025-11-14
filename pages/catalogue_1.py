@@ -66,6 +66,8 @@ gridOptions = gb.build()
 gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['toolbarPosition'] = 'bottom'
+gridOptions['suppressColumnVirtualisation'] = True
+
 
 # custom_theme = (
 #     StAggridTheme(base="quartz")
@@ -77,7 +79,7 @@ gridOptions['toolbarPosition'] = 'bottom'
 grid1 = AgGrid(df_cme, show_toolbar=True, height=500, gridOptions=gridOptions, 
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
-                fit_columns_on_grid_load=st.session_state.fit_columns_on_grid_load,
+                # fit_columns_on_grid_load=st.session_state.fit_columns_on_grid_load,
                 columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
                 theme=st.session_state.selected_theme,
                 key="table1",
