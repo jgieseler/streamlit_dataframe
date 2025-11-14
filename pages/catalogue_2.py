@@ -113,7 +113,7 @@ gridOptions["tooltipShowDelay"] = 500
 grid2 = AgGrid(df_cat_2, show_toolbar=True, height=500, gridOptions=gridOptions, 
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
-                # fit_columns_on_grid_load=st.session_state.fit_columns_on_grid_load,
+                fit_columns_on_grid_load=False,  # st.session_state.fit_columns_on_grid_load,
                 # columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
                 theme=st.session_state.selected_theme,
                 key="table2",
