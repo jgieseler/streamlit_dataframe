@@ -17,7 +17,7 @@ st.set_page_config(
 #     if my_key in st.session_state:
 #         st.session_state[my_key] = st.session_state[my_key]
 
-st.session_state.fit_columns_on_grid_load = False
+st.sidebar.checkbox("Fit columns on grid load", value=False, key='fit_columns_on_grid_load')
 
 available_themes = ["streamlit", "light", "dark", "blue", "fresh", "material", "quartz",  "alpine"]
 selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_theme')
