@@ -79,7 +79,7 @@ gb.configure_columns(column_names=time_columns, cellStyle = cell_stylejscode)
 gridOptions = gb.build() 
 gridOptions['rowSelection'] = 'multiple'  # 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
-gridOptions['autoSizeStrategy'] = 'fitCellContents'
+gridOptions['autoSizeStrategy'] = 'fitGridWidth'  # 'fitCellContents'
 
 # Colour rows where STIX start time is NaT
 # jscode2 = JsCode("""

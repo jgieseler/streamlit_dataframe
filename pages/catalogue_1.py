@@ -66,8 +66,9 @@ gridOptions = gb.build()
 gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['toolbarPosition'] = 'bottom'
-gridOptions['suppressColumnVirtualisation'] = True
-gridOptions['autoSizeStrategy'] = 'fitCellContents'
+# gridOptions['suppressColumnVirtualisation'] = True
+if st.session_state.fitCellContents:
+  gridOptions['autoSizeStrategy'] = 'fitCellContents'
 
 
 # custom_theme = (
@@ -81,7 +82,7 @@ grid1 = AgGrid(df_cme, show_toolbar=True, height=500, gridOptions=gridOptions,
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
                 # fit_columns_on_grid_load=st.session_state.fit_columns_on_grid_load,
-                columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
+                # columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
                 theme=st.session_state.selected_theme,
                 key="table1",
                 )
