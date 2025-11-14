@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
+from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
 # from st_aggrid.shared import JsCode
 
 
@@ -78,6 +78,7 @@ grid1 = AgGrid(df_cme, show_toolbar=True, height=500, gridOptions=gridOptions,
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
                 fit_columns_on_grid_load=st.session_state.fit_columns_on_grid_load,
+                columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
                 theme=st.session_state.selected_theme,
                 key="table1",
                 )
