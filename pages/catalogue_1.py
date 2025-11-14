@@ -67,11 +67,7 @@ gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['toolbarPosition'] = 'bottom'
 # gridOptions['suppressColumnVirtualisation'] = True
-if st.session_state.fitCellContents:
-  gridOptions['autoSizeStrategy'] = 'fitCellContents'
-else:
-  gridOptions['autoSizeStrategy'] = None
-
+gridOptions['autoSizeStrategy'] = 'fitCellContents'
 
 # custom_theme = (
 #     StAggridTheme(base="quartz")
