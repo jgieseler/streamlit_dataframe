@@ -5,7 +5,10 @@ st.title("SOLER Catalogues")
 
 st.write('Here you find some general info about the catalogues and how to use them.')
 
-st.write('Select the catalogue you want to explore from the top navigation bar.')
+st.write('Select the catalogue you want to explore:')
+
+st.page_link("pages/catalogue_1.py", label="CME_catalog", icon="1️⃣")
+st.page_link("pages/catalogue_2.py", label="Flare_catalog", icon="2️⃣")
 
 st.write('Open the sidebar (">>" in the top left) for options.')
 
