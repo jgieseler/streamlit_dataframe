@@ -67,6 +67,7 @@ gridOptions['rowSelection'] = 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['toolbarPosition'] = 'bottom'
 gridOptions['suppressColumnVirtualisation'] = True
+gridOptions['autoSizeStrategy'] = 'fitCellContents'
 
 
 # custom_theme = (
