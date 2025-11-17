@@ -28,6 +28,7 @@ selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_t
 pages = [st.Page("pages/home.py", title="Home"),
          st.Page("pages/catalogue_1.py", title="CME_catalog"),
          st.Page("pages/catalogue_2.py", title="Flare_catalog"),
+         st.Page("pages/catalogue_3.py", title="SEP catalog"),
         ]
 
 pg = st.navigation(pages, position="top")
