@@ -61,14 +61,14 @@ default_columns = pd.read_csv('catalogues/SOLER_SEP_catalog_PyOnset - Sheet1.csv
 if 'selected_columns_3' in st.session_state:
   default_keys = st.session_state.selected_columns_3
 else:
-  default_keys = df_cat_3_org.keys()
+  default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
 st.multiselect("Select columns to display (by default all are active).", options=df_cat_3_org.keys(), default=default_keys, key='_selected_columns_3', on_change=store_value, args=["selected_columns_3"])
 
 if 'selected_columns_3' in st.session_state:
   df_cat_3 = df_cat_3_org[st.session_state.selected_columns_3]
 else:
-  df_cat_3 = df_cat_3_org[default_columns]  # TODO: provides this as an option? show all columns?
+  df_cat_3 = df_cat_3_org[default_keys]
 
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_3)
@@ -94,7 +94,8 @@ cell_style_NaT = JsCode("""
 gb.configure_columns(column_names=date_columns, cellDataType='date', type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='yyyy-MM-dd', cellStyle=cell_style_NaT)
 
 for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No"]:
-  gb.configure_column(key, spanRows='true')
+  if key in df_cat_3.columns:
+    gb.configure_column(key, spanRows='true')
 
 
 
@@ -104,6 +105,7 @@ gridOptions['rowSelection'] = 'single'  # 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['autoSizeStrategy'] = 'fitCellContents'  # 'fitGridWidth'  # 'fitCellContents'
 gridOptions['enableCellSpan'] = 'true'
+gridOptions['suppressColumnVirtualisation'] = True
 
 
 
