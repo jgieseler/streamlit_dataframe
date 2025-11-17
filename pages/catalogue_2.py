@@ -10,7 +10,8 @@ fname = 'Flare_catalog'  # 'full_catalog_with_stix_merged_with_cme'
 st.title(fname)
 
 t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
-time_columns = [col for col in t_df.columns if 'time' in col]
+time_columns = [col for col in t_df.columns if 'Time' in col]
+
 
 
 df_cat_2_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=time_columns)
