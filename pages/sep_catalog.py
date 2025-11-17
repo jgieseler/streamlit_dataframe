@@ -52,6 +52,11 @@ if 'Observer' in df_cat_3_org.columns:
   df_cat_3_org = df_cat_3_org.loc[df_cat_3_org['Observer'].isin(sc_list)]
 
 
+
+default_columns = pd.read_csv('catalogues/SOLER_SEP_catalog_PyOnset - Sheet1.csv', header=None).values.flatten().tolist()
+
+# df = df[['Column1', 'Column2', 'Column3']]
+
 # select columns to display
 if 'selected_columns_3' in st.session_state:
   default_keys = st.session_state.selected_columns_3
@@ -63,9 +68,7 @@ st.multiselect("Select columns to display (by default all are active).", options
 if 'selected_columns_3' in st.session_state:
   df_cat_3 = df_cat_3_org[st.session_state.selected_columns_3]
 else:
-  df_cat_3 = df_cat_3_org
-
-
+  df_cat_3 = df_cat_3_org[default_columns]  # TODO: provides this as an option? show all columns?
 
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_3)
