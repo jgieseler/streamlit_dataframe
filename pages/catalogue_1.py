@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme, ColumnsAutoSizeMode
 # from st_aggrid.shared import JsCode
 
 

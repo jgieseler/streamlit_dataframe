@@ -1,7 +1,7 @@
 import pooch
 import pandas as pd
 import streamlit as st
-from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
+from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
 from st_aggrid.shared import JsCode
 from time import sleep
 
