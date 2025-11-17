@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
+from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder, GridUpdateMode #, StAggridTheme
 from st_aggrid.shared import JsCode
 from time import sleep
 
@@ -100,7 +100,7 @@ for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No"]:
 
 
 gridOptions = gb.build() 
-gridOptions['rowSelection'] = 'multiple'  # 'multiple'  # 'single'
+gridOptions['rowSelection'] = 'single'  # 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['autoSizeStrategy'] = 'fitCellContents'  # 'fitGridWidth'  # 'fitCellContents'
 gridOptions['enableCellSpan'] = 'true'
@@ -110,7 +110,6 @@ gridOptions['enableCellSpan'] = 'true'
 grid3 = AgGrid(df_cat_3, show_toolbar=True, height=500, gridOptions=gridOptions, 
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
-                # fit_columns_on_grid_load=False,  # st.session_state.fit_columns_on_grid_load,
                 # columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
                 theme=st.session_state.selected_theme,
                 key="table3",
