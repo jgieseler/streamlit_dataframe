@@ -20,6 +20,39 @@ def store_value(my_key):
     # Copy the value to the permanent key
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
+
+st.write("Select spacecraft to include data from:")
+with st.container(horizontal=True):
+  spacecraft = {}
+  spacecraft['bepi'] = 'BepiColombo'
+  spacecraft['l1'] = 'L1 (SOHO/Wind)'
+  spacecraft['psp'] = 'PSP'
+  spacecraft['solo'] = 'SOLO'
+  spacecraft['sta'] = 'STEREO-A'
+
+  default_sc = {}
+  for sc in spacecraft.keys():
+    if f'sc_{sc}' in st.session_state:
+      default_sc[sc] = st.session_state[f'sc_{sc}']
+    else:
+      default_sc[sc] = True
+
+  st.checkbox("BepiColombo", value=default_sc['bepi'], key='_sc_bepi', on_change=store_value, args=["sc_bepi"])
+  st.checkbox("L1 (SOHO/Wind)", value=default_sc['l1'], key='_sc_l1', on_change=store_value, args=["sc_l1"])
+  st.checkbox("Parker Solar Probe", value=default_sc['psp'], key='_sc_psp', on_change=store_value, args=["sc_psp"])
+  st.checkbox("Solar Orbiter", value=default_sc['solo'], key='_sc_solo', on_change=store_value, args=["sc_solo"])
+  st.checkbox("STEREO-A", value=default_sc['sta'], key='_sc_sta', on_change=store_value, args=["sc_sta"])
+
+sc_list = []
+for sc in spacecraft.keys():
+  if default_sc[sc]:
+    sc_list.append(spacecraft[sc])
+
+if 'Observer' in df_cat_3_org.columns:
+  df_cat_3_org = df_cat_3_org.loc[df_cat_3_org['Observer'].isin(sc_list)]
+
+
+# select columns to display
 if 'selected_columns_3' in st.session_state:
   default_keys = st.session_state.selected_columns_3
 else:
@@ -33,31 +66,7 @@ else:
   df_cat_3 = df_cat_3_org
 
 
-# TODO: select spacecraft filtering method, add to sesssion_state so that it's persistent
 
-# if 'selected_sc_3' in st.session_state:
-#   default_sc = st.session_state.selected_sc_3
-# else:
-#   default_sc = ['BepiColombo', 'L1 (SOHO/Wind)', 'PSP', 'SOLO', 'STEREO-A']
-# st.multiselect("Select spacecraft to include data from:", options=['BepiColombo', 'L1 (SOHO/Wind)', 'PSP', 'SOLO', 'STEREO-A'], default=default_sc, key='_selected_sc_3', on_change=store_value, args=["selected_sc_3"])
-# st.write(st.session_state._selected_sc_3)
-
-
-st.write("Select spacecraft to include data from:")
-with st.container(horizontal=True):
-  sc = {}
-  sc['BepiColombo'] = st.checkbox("Bepistmbo", value=True)
-  sc['L1 (SOHO/Wind)'] = st.checkbox("L1 (SOHO/Wind)", value=True)
-  sc['PSP'] = st.checkbox("Parker Solar Probe", value=True)
-  sc['SOLO'] = st.checkbox("Solar Orbiter", value=True)
-  sc['STEREO-A'] = st.checkbox("STEREO-A", value=True)
-  sc_list = [k for k, v in sc.items() if v]
-
-# for key, value in sc.items():
-#     if not value:
-#         df_cat_3.drop(df_cat_3.filter(like=f'{key}_',axis=1).columns.to_list(), axis=1, inplace=True)
-
-df_cat_3 = df_cat_3[df_cat_3['Observer'].isin(sc_list)]
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_3)
 for key in df_cat_3.keys():
