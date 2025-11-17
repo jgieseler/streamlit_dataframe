@@ -54,11 +54,18 @@ cell_style_NaT = JsCode("""
 
 gb.configure_columns(column_names=date_columns, cellDataType='date', type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='yyyy-MM-dd', cellStyle=cell_style_NaT)
 
+for key in ["SEP_IDX", "Event No"]:
+  gb.configure_column(key, spanRows='true')
+
+
+
 
 gridOptions = gb.build() 
 gridOptions['rowSelection'] = 'multiple'  # 'multiple'  # 'single'
 gridOptions["tooltipShowDelay"] = 500
 gridOptions['autoSizeStrategy'] = 'fitCellContents'  # 'fitGridWidth'  # 'fitCellContents'
+gridOptions['enableCellSpan'] = 'true'
+
 
 
 grid3 = AgGrid(df_cat_3, show_toolbar=True, height=500, gridOptions=gridOptions, 
