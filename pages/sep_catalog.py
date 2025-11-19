@@ -63,7 +63,7 @@ if 'selected_columns_3' in st.session_state:
 else:
   default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
-st.multiselect("Select columns to display (by default all are active).", options=df_cat_3_org.keys(), default=default_keys, key='_selected_columns_3', on_change=store_value, args=["selected_columns_3"])
+st.multiselect("Select columns to display (by default only a selection is active; click below to add hidden columns).", options=df_cat_3_org.keys(), default=default_keys, key='_selected_columns_3', on_change=store_value, args=["selected_columns_3"])
 
 if 'selected_columns_3' in st.session_state:
   df_cat_3 = df_cat_3_org[st.session_state.selected_columns_3]
