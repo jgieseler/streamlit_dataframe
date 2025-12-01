@@ -29,10 +29,12 @@ def store_value(my_key):
     # Copy the value to the permanent key
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
+default_columns = df_cme_org.keys()  # TODO: add here a default list of columns to show
+
 if 'selected_columns_1' in st.session_state:
   default_keys = st.session_state.selected_columns_1
 else:
-  default_keys = df_cme_org.keys()
+  default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
 st.multiselect("Select columns to display (by default all are active).", options=df_cme_org.keys(), default=default_keys, key='_selected_columns_1', on_change=store_value, args=["selected_columns_1"])
 # st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
@@ -46,7 +48,8 @@ if 'selected_columns_1' in st.session_state:
   # [hidden_columns.remove(col) for col in st.session_state.selected_columns_1]
 else:
   df_cme = df_cme_org
-  hidden_columns = []
+  for col in default_keys:
+    hidden_columns.remove(col)
 if len(hidden_columns) == 0:
   st.write("All columns are displayed.")
 elif len(hidden_columns) > 0:
