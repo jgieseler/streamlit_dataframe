@@ -64,11 +64,18 @@ else:
   default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
 st.multiselect("Select columns to display (by default only a selection is active; click below to add hidden columns).", options=df_cat_3_org.keys(), default=default_keys, key='_selected_columns_3', on_change=store_value, args=["selected_columns_3"])
-
+hidden_columns = df_cat_3_org.keys().tolist()
 if 'selected_columns_3' in st.session_state:
   df_cat_3 = df_cat_3_org[st.session_state.selected_columns_3]
+  for col in st.session_state.selected_columns_3:
+    hidden_columns.remove(col) 
 else:
-  df_cat_3 = df_cat_3_org[default_keys]
+  df_cat_3 = df_cat_3_org
+  hidden_columns = []
+if len(hidden_columns) == 0:
+  st.write("All columns are displayed.")
+elif len(hidden_columns) > 0:
+  st.write(f"Hidden columns: {hidden_columns}")
 
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_3)

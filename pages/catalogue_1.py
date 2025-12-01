@@ -36,10 +36,22 @@ else:
 
 st.multiselect("Select columns to display (by default all are active).", options=df_cme_org.keys(), default=default_keys, key='_selected_columns_1', on_change=store_value, args=["selected_columns_1"])
 # st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
+hidden_columns = df_cme_org.keys().tolist()
 if 'selected_columns_1' in st.session_state:
   df_cme = df_cme_org[st.session_state.selected_columns_1]
+  # hidden_columns = hidden_columns.remove('CME IDX')
+  # st.write([col for col in st.session_state.selected_columns_1])
+  for col in st.session_state.selected_columns_1:
+    hidden_columns.remove(col) 
+  # [hidden_columns.remove(col) for col in st.session_state.selected_columns_1]
 else:
   df_cme = df_cme_org
+  hidden_columns = []
+if len(hidden_columns) == 0:
+  st.write("All columns are displayed.")
+elif len(hidden_columns) > 0:
+  # st.write(f"Displaying {len(df_cme.keys())} columns out of {len(df_cme_org.keys())}." + " " + f"Hidden columns: {hidden_columns}")
+  st.write(f"Hidden columns: {hidden_columns}")
 
 # for key, value in column.items():
 #     if not value:

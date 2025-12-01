@@ -27,11 +27,18 @@ else:
 
 st.multiselect("Select columns to display (by default all are active).", options=df_cat_2_org.keys(), default=default_keys, key='_selected_columns_2', on_change=store_value, args=["selected_columns_2"])
 # st.multiselect("Select columns to display (by default all are active).", options=df_cat_2_org.keys(), default=default_keys, key='_selected_columns_2')
-
+hidden_columns = df_cat_2_org.keys().tolist()
 if 'selected_columns_2' in st.session_state:
   df_cat_2 = df_cat_2_org[st.session_state.selected_columns_2]
+  for col in st.session_state.selected_columns_2:
+    hidden_columns.remove(col) 
 else:
   df_cat_2 = df_cat_2_org
+  hidden_columns = []
+if len(hidden_columns) == 0:
+  st.write("All columns are displayed.")
+elif len(hidden_columns) > 0:
+  st.write(f"Hidden columns: {hidden_columns}")
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_2)
 # gb.configure_column("# id", header_name='Event ID')
