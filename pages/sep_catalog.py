@@ -71,7 +71,8 @@ if 'selected_columns_3' in st.session_state:
     hidden_columns.remove(col) 
 else:
   df_cat_3 = df_cat_3_org
-  hidden_columns = []
+  for col in default_keys:
+    hidden_columns.remove(col) 
 if len(hidden_columns) == 0:
   st.write("All columns are displayed.")
 elif len(hidden_columns) > 0:
