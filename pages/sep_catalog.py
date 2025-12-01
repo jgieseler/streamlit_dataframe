@@ -70,7 +70,7 @@ if 'selected_columns_3' in st.session_state:
   for col in st.session_state.selected_columns_3:
     hidden_columns.remove(col) 
 else:
-  df_cat_3 = df_cat_3_org
+  df_cat_3 = df_cat_3_org[default_keys]
   for col in default_keys:
     hidden_columns.remove(col) 
 if len(hidden_columns) == 0:

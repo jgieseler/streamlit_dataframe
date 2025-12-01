@@ -49,7 +49,7 @@ if 'selected_columns_1' in st.session_state:
     hidden_columns.remove(col) 
   # [hidden_columns.remove(col) for col in st.session_state.selected_columns_1]
 else:
-  df_cme = df_cme_org
+  df_cme = df_cme_org[default_keys]
   for col in default_keys:
     hidden_columns.remove(col)
 if len(hidden_columns) == 0:
