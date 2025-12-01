@@ -30,7 +30,8 @@ def store_value(my_key):
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
 default_columns = df_cme_org.keys().tolist()
-for col in ["Start Time (Observer)" , "Start time (1 AU)"]:
+hid_cols = ["Start time (Sun)" , "Start time (1 AU)"]
+for col in hid_cols:
   default_columns.remove(col)
 
 if 'selected_columns_1' in st.session_state:
