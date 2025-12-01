@@ -50,8 +50,9 @@ else:
 if len(hidden_columns) == 0:
   st.write("All columns are displayed.")
 elif len(hidden_columns) > 0:
-  # st.write(f"Displaying {len(df_cme.keys())} columns out of {len(df_cme_org.keys())}." + " " + f"Hidden columns: {hidden_columns}")
-  st.write(f"Hidden columns: {hidden_columns}")
+  with st.expander(f"{len(hidden_columns)} columns hidden (click for details):"):
+    st.dataframe(pd.DataFrame(hidden_columns, columns=['Column name']), hide_index=True)
+    st.write("To show hidden columns, select them from the multiselect box above.")
 
 # for key, value in column.items():
 #     if not value:

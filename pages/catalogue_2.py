@@ -38,7 +38,9 @@ else:
 if len(hidden_columns) == 0:
   st.write("All columns are displayed.")
 elif len(hidden_columns) > 0:
-  st.write(f"Hidden columns: {hidden_columns}")
+  with st.expander(f"{len(hidden_columns)} columns hidden (click for details):"):
+    st.dataframe(pd.DataFrame(hidden_columns, columns=['Column name']), hide_index=True)
+    st.write("To show hidden columns, select them from the multiselect box above.")
 
 gb = GridOptionsBuilder.from_dataframe(df_cat_2)
 # gb.configure_column("# id", header_name='Event ID')
