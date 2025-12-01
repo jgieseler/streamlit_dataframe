@@ -20,7 +20,10 @@ def store_value(my_key):
     # Copy the value to the permanent key
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
-default_columns = df_cat_2_org.keys()  # TODO: add here a default list of columns to show
+default_columns = df_cat_2_org.keys().tolist()
+# TODO: add here a list of columns to hide by default
+# for col in ["Start Time (Observer)" , "Start time (1 AU)"]:
+#   default_columns.remove(col)
 
 if 'selected_columns_2' in st.session_state:
   default_keys = st.session_state.selected_columns_2
