@@ -21,9 +21,10 @@ def store_value(my_key):
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
 default_columns = df_cat_2_org.keys().tolist()
-# TODO: add here a list of columns to hide by default
-# for col in ["Start Time (Observer)" , "Start time (1 AU)"]:
-#   default_columns.remove(col)
+hid_cols = ["Start Time at 1 AU (GOES)", "Start Time at 1 AU (STIX)", "Peak Time at 1 AU (GOES)", "Peak Time at 1 AU (STIX)", "End Time at 1 AU (GOES)", "End Time at 1 AU (STIX)", 
+            "Start Time at the Sun (GOES)", "Start Time at the Sun (STIX)", "Peak Time at the Sun (GOES)", "Peak Time at the Sun (STIX)", "End Time at the Sun (GOES)", "End Time at the Sun (STIX)"]
+for col in hid_cols:
+  default_columns.remove(col)
 
 if 'selected_columns_2' in st.session_state:
   default_keys = st.session_state.selected_columns_2
@@ -38,7 +39,7 @@ if 'selected_columns_2' in st.session_state:
   for col in st.session_state.selected_columns_2:
     hidden_columns.remove(col) 
 else:
-  df_cat_2 = df_cat_2_org
+  df_cat_2 = df_cat_2_org[default_keys]
   for col in default_keys:
     hidden_columns.remove(col) 
 if len(hidden_columns) == 0:
