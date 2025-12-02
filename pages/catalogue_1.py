@@ -6,11 +6,9 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridThem
 
 
 
-fname = 'CME_catalog'  # 'full_catalog_cme_merged_with_flares_and_weak_flares'
+st.title('CME catalog')
 
-st.title(fname)
-
-df_cme_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',',
+df_cme_org = pd.read_csv('catalogues/CME_catalog.csv', sep=',',
                     parse_dates=['Start Time (Observer)', 'Start time (1 AU)', 'Start time (Sun)'])
 
 # remove asterix (*) from columns

@@ -6,7 +6,7 @@ from time import sleep
 
 fname = 'SOLER_SEP_catalog_PyOnset - WP2_multi_sc_event_list_draft'  # 'full_catalog_with_stix_merged_with_cme'
 
-st.title(fname)
+st.title('SEP catalog')
 
 t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 datetime_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]

@@ -7,7 +7,7 @@ from time import sleep
 
 fname = 'Flare_catalog'  # 'full_catalog_with_stix_merged_with_cme'
 
-st.title(fname)
+st.title('Flare catalog')
 
 t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 time_columns = [col for col in t_df.columns if 'Time' in col]

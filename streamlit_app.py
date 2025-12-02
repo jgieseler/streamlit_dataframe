@@ -25,8 +25,8 @@ selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_t
 # st.sidebar.write(st.session_state)
 
 pages = [st.Page("pages/home.py", title="Home"),
-         st.Page("pages/catalogue_1.py", title="CME_catalog"),
-         st.Page("pages/catalogue_2.py", title="Flare_catalog"),
+         st.Page("pages/catalogue_1.py", title="CME catalog"),
+         st.Page("pages/catalogue_2.py", title="Flare catalog"),
          st.Page("pages/sep_catalog.py", title="SEP catalog"),
         ]
 
