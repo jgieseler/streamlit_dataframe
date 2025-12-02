@@ -14,32 +14,32 @@ time_columns = [col for col in t_df.columns if 'Time' in col]
 
 
 
-df_cat_2_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=time_columns)
+df_flare_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=time_columns)
 
 def store_value(my_key):
     # Copy the value to the permanent key
     st.session_state[my_key] = st.session_state[f"_{my_key}"]
 
-default_columns = df_cat_2_org.keys().tolist()
+default_columns = df_flare_org.keys().tolist()
 hid_cols = ["Start Time at 1 AU (GOES)", "Start Time at 1 AU (STIX)", "Peak Time at 1 AU (GOES)", "Peak Time at 1 AU (STIX)", "End Time at 1 AU (GOES)", "End Time at 1 AU (STIX)", 
             "Start Time at the Sun (GOES)", "Start Time at the Sun (STIX)", "Peak Time at the Sun (GOES)", "Peak Time at the Sun (STIX)", "End Time at the Sun (GOES)", "End Time at the Sun (STIX)"]
 for col in hid_cols:
   default_columns.remove(col)
 
-if 'selected_columns_2' in st.session_state:
-  default_keys = st.session_state.selected_columns_2
+if 'selected_columns_flare' in st.session_state:
+  default_keys = st.session_state.selected_columns_flare
 else:
   default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
-st.multiselect("Select columns to display (by default all are active).", options=df_cat_2_org.keys(), default=default_keys, key='_selected_columns_2', on_change=store_value, args=["selected_columns_2"])
-# st.multiselect("Select columns to display (by default all are active).", options=df_cat_2_org.keys(), default=default_keys, key='_selected_columns_2')
-hidden_columns = df_cat_2_org.keys().tolist()
-if 'selected_columns_2' in st.session_state:
-  df_cat_2 = df_cat_2_org[st.session_state.selected_columns_2]
-  for col in st.session_state.selected_columns_2:
+st.multiselect("Select columns to display (by default all are active).", options=df_flare_org.keys(), default=default_keys, key='_selected_columns_flare', on_change=store_value, args=["selected_columns_flare"])
+# st.multiselect("Select columns to display (by default all are active).", options=df_flare_org.keys(), default=default_keys, key='_selected_columns_flare')
+hidden_columns = df_flare_org.keys().tolist()
+if 'selected_columns_flare' in st.session_state:
+  df_flare = df_flare_org[st.session_state.selected_columns_flare]
+  for col in st.session_state.selected_columns_flare:
     hidden_columns.remove(col) 
 else:
-  df_cat_2 = df_cat_2_org[default_keys]
+  df_flare = df_flare_org[default_keys]
   for col in default_keys:
     hidden_columns.remove(col) 
 if len(hidden_columns) == 0:
@@ -49,9 +49,9 @@ elif len(hidden_columns) > 0:
     st.dataframe(pd.DataFrame(hidden_columns, columns=['Column name']), hide_index=True)
     st.write("To show hidden columns, select them from the multiselect box above.")
 
-gb = GridOptionsBuilder.from_dataframe(df_cat_2)
+gb = GridOptionsBuilder.from_dataframe(df_flare)
 # gb.configure_column("# id", header_name='Event ID')
-for key in df_cat_2.keys():
+for key in df_flare.keys():
   gb.configure_column(key, tooltipField=str(key), headerTooltip=str(key))
 # gb.configure_column("flare_comments", header_name='Flare Comments', tooltipField='flare_comments', headerTooltip='Comments about flares', width=10)
 
@@ -128,7 +128,7 @@ gridOptions['autoSizeStrategy'] = 'fitCellContents'  # 'fitGridWidth'  # 'fitCel
 # )
 
 
-grid2 = AgGrid(df_cat_2, show_toolbar=True, height=500, gridOptions=gridOptions, 
+grid2 = AgGrid(df_flare, show_toolbar=True, height=500, gridOptions=gridOptions, 
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
                 # columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,

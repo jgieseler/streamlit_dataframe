@@ -7,8 +7,8 @@ st.write('Here you find some general info about the catalogues and how to use th
 
 st.write('Select the catalogue you want to explore:')
 
-st.page_link("pages/catalogue_1.py", label="CME_catalog", icon="1️⃣")
-st.page_link("pages/catalogue_2.py", label="Flare_catalog", icon="2️⃣")
+st.page_link("pages/cme_catalog.py", label="CME_catalog", icon="1️⃣")
+st.page_link("pages/flare_catalog.py", label="Flare_catalog", icon="2️⃣")
 st.page_link("pages/sep_catalog.py", label="SEP catalog", icon="3️⃣")
 
 st.write('Open the sidebar (">>" in the top left) for options.')

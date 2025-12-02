@@ -32,21 +32,21 @@ hid_cols = ["Start time (Sun)" , "Start time (1 AU)"]
 for col in hid_cols:
   default_columns.remove(col)
 
-if 'selected_columns_1' in st.session_state:
-  default_keys = st.session_state.selected_columns_1
+if 'selected_columns_cme' in st.session_state:
+  default_keys = st.session_state.selected_columns_cme
 else:
   default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
-st.multiselect("Select columns to display (by default all are active).", options=df_cme_org.keys(), default=default_keys, key='_selected_columns_1', on_change=store_value, args=["selected_columns_1"])
-# st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_1')
+st.multiselect("Select columns to display (by default all are active).", options=df_cme_org.keys(), default=default_keys, key='_selected_columns_cme', on_change=store_value, args=["selected_columns_cme"])
+# st.multiselect("Select columns to display  (by default all are active).", options=df_cme.keys(), default=df_cme.keys(), key='selected_columns_cme')
 hidden_columns = df_cme_org.keys().tolist()
-if 'selected_columns_1' in st.session_state:
-  df_cme = df_cme_org[st.session_state.selected_columns_1]
+if 'selected_columns_cme' in st.session_state:
+  df_cme = df_cme_org[st.session_state.selected_columns_cme]
   # hidden_columns = hidden_columns.remove('CME IDX')
-  # st.write([col for col in st.session_state.selected_columns_1])
-  for col in st.session_state.selected_columns_1:
+  # st.write([col for col in st.session_state.selected_columns_cme])
+  for col in st.session_state.selected_columns_cme:
     hidden_columns.remove(col) 
-  # [hidden_columns.remove(col) for col in st.session_state.selected_columns_1]
+  # [hidden_columns.remove(col) for col in st.session_state.selected_columns_cme]
 else:
   df_cme = df_cme_org[default_keys]
   for col in default_keys:

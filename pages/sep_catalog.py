@@ -13,7 +13,7 @@ datetime_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 date_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 time_columns = [col for col in t_df.columns if 'HH:MM:SS' in col]
 
-df_cat_3_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=datetime_columns)
+df_sep_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=datetime_columns)
 
 
 def store_value(my_key):
@@ -48,8 +48,8 @@ for sc in spacecraft.keys():
   if default_sc[sc]:
     sc_list.append(spacecraft[sc])
 
-if 'Observer' in df_cat_3_org.columns:
-  df_cat_3_org = df_cat_3_org.loc[df_cat_3_org['Observer'].isin(sc_list)]
+if 'Observer' in df_sep_org.columns:
+  df_sep_org = df_sep_org.loc[df_sep_org['Observer'].isin(sc_list)]
 
 
 
@@ -58,19 +58,19 @@ default_columns = pd.read_csv('catalogues/SOLER_SEP_catalog_PyOnset - Sheet1.csv
 # df = df[['Column1', 'Column2', 'Column3']]
 
 # select columns to display
-if 'selected_columns_3' in st.session_state:
-  default_keys = st.session_state.selected_columns_3
+if 'selected_columns_sep' in st.session_state:
+  default_keys = st.session_state.selected_columns_sep
 else:
   default_keys = default_columns  # TODO: provides this as an option? show all columns?
 
-st.multiselect("Select columns to display (by default only a selection is active; click below to add hidden columns).", options=df_cat_3_org.keys(), default=default_keys, key='_selected_columns_3', on_change=store_value, args=["selected_columns_3"])
-hidden_columns = df_cat_3_org.keys().tolist()
-if 'selected_columns_3' in st.session_state:
-  df_cat_3 = df_cat_3_org[st.session_state.selected_columns_3]
-  for col in st.session_state.selected_columns_3:
+st.multiselect("Select columns to display (by default only a selection is active; click below to add hidden columns).", options=df_sep_org.keys(), default=default_keys, key='_selected_columns_sep', on_change=store_value, args=["selected_columns_sep"])
+hidden_columns = df_sep_org.keys().tolist()
+if 'selected_columns_sep' in st.session_state:
+  df_sep = df_sep_org[st.session_state.selected_columns_sep]
+  for col in st.session_state.selected_columns_sep:
     hidden_columns.remove(col) 
 else:
-  df_cat_3 = df_cat_3_org[default_keys]
+  df_sep = df_sep_org[default_keys]
   for col in default_keys:
     hidden_columns.remove(col) 
 if len(hidden_columns) == 0:
@@ -81,8 +81,8 @@ elif len(hidden_columns) > 0:
     st.write("To show hidden columns, select them from the multiselect box above.")
 
 
-gb = GridOptionsBuilder.from_dataframe(df_cat_3)
-for key in df_cat_3.keys():
+gb = GridOptionsBuilder.from_dataframe(df_sep)
+for key in df_sep.keys():
   gb.configure_column(key, tooltipField=str(key), headerTooltip=str(key))
 # gb.configure_column("flare_comments", header_name='Flare Comments', tooltipField='flare_comments', headerTooltip='Comments about flares', width=10)
 
@@ -104,7 +104,7 @@ cell_style_NaT = JsCode("""
 gb.configure_columns(column_names=date_columns, cellDataType='date', type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='yyyy-MM-dd', cellStyle=cell_style_NaT)
 
 for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No"]:
-  if key in df_cat_3.columns:
+  if key in df_sep.columns:
     gb.configure_column(key, spanRows='true')
 
 
@@ -119,7 +119,7 @@ gridOptions['suppressColumnVirtualisation'] = True
 
 
 
-grid3 = AgGrid(df_cat_3, show_toolbar=True, height=500, gridOptions=gridOptions, 
+grid3 = AgGrid(df_sep, show_toolbar=True, height=500, gridOptions=gridOptions, 
                 updateMode=GridUpdateMode.SELECTION_CHANGED,  # GridUpdateMode.VALUE_CHANGED,
                 allow_unsafe_jscode=True,
                 # columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
