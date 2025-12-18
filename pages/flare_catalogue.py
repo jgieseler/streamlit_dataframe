@@ -5,16 +5,18 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridThem
 from st_aggrid.shared import JsCode
 from time import sleep
 
-fname = 'SOLER_Flare_catalog'  # 'full_catalog_with_stix_merged_with_cme'
+fname = 'SOLER_Flare_catalogue'  # 'full_catalogue_with_stix_merged_with_cme'
 
-st.title('Flare catalog')
+st.title('Flare catalogue')
 
-t_df = pd.read_csv(f'catalogs/{fname}.csv', sep=',')
+st.write('This catalogue contains solar flares with a flare class > M5 observed in solar cycle 25, including key characteristics of each flare. The flares in this catalogue were compiled using observation from two spacecraft: the Geostationary Operational Environmental Satellite (GOES) and Solar Orbiter (SolO).')
+
+t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 time_columns = [col for col in t_df.columns if 'Time' in col]
 
 
 
-df_flare_org = pd.read_csv(f'catalogs/{fname}.csv', sep=',', parse_dates=time_columns)
+df_flare_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=time_columns)
 
 def store_value(my_key):
     # Copy the value to the permanent key
