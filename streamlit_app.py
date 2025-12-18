@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="SOLER Catalogs",
+    page_title="SOLER Catalogues",
     page_icon="images/SOLER_Favicon-150x150.png",  # "☀️",  # 🔆
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -25,9 +25,9 @@ selected_theme = st.sidebar.selectbox("Theme", available_themes, key='selected_t
 # st.sidebar.write(st.session_state)
 
 pages = [st.Page("pages/home.py", title="Home"),
-         st.Page("pages/cme_catalog.py", title="CME catalog"),
-         st.Page("pages/flare_catalog.py", title="Flare catalog"),
-         st.Page("pages/sep_catalog.py", title="SEP catalog"),
+         st.Page("pages/cme_catalogue.py", title="CME catalogue"),
+         st.Page("pages/flare_catalogue.py", title="Flare catalogue"),
+         st.Page("pages/sep_catalogue.py", title="SEP catalogue"),
         ]
 
 pg = st.navigation(pages, position="top")

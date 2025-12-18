@@ -4,18 +4,18 @@ from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder, GridUpdat
 from st_aggrid.shared import JsCode
 from time import sleep
 
-fname = 'SOLER_SEP_catalog'  # 'full_catalog_with_stix_merged_with_cme'
+fname = 'SOLER_SEP_catalogue'  # 'full_catalogue_with_stix_merged_with_cme'
 
-st.title('SEP catalog')
+st.title('SEP catalogue')
 
-st.write('This catalog contains multi-spacecraft solar energetic particle (SEP) events, which were observed with the new spacecraft fleet in solar cycle 25. The catalog comprises key SEP characteristics observed by five different observer locations as provided by Solar Orbiter, Parker Solar Probe, STEREO A, Wind and SOHO (at the Lagrangian point 1), and BepiColombo. The catalog focuses on large events, which show energetic proton increases above 25 MeV. The catalog provides not only key parameters of the proton event but also the same parameters for 1 MeV and 100 keV electrons, respectively.')
+st.write('This catalogue contains multi-spacecraft solar energetic particle (SEP) events, which were observed with the new spacecraft fleet in solar cycle 25. The catalogue comprises key SEP characteristics observed by five different observer locations as provided by Solar Orbiter, Parker Solar Probe, STEREO A, Wind and SOHO (at the Lagrangian point 1), and BepiColombo. The catalogue focuses on large events, which show energetic proton increases above 25 MeV. The catalogue provides not only key parameters of the proton event but also the same parameters for 1 MeV and 100 keV electrons, respectively.')
 
-t_df = pd.read_csv(f'catalogs/{fname}.csv', sep=',')
+t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 datetime_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 date_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 time_columns = [col for col in t_df.columns if 'HH:MM:SS' in col]
 
-df_sep_org = pd.read_csv(f'catalogs/{fname}.csv', sep=',', parse_dates=datetime_columns)
+df_sep_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=datetime_columns)
 
 
 def store_value(my_key):
@@ -55,7 +55,7 @@ if 'Observer' in df_sep_org.columns:
 
 
 
-default_columns = pd.read_csv('catalogs/SOLER_SEP_catalog_columns.csv', header=None).values.flatten().tolist()
+default_columns = pd.read_csv('catalogues/SOLER_SEP_catalogue_columns.csv', header=None).values.flatten().tolist()
 
 # df = df[['Column1', 'Column2', 'Column3']]
 
