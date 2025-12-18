@@ -9,6 +9,8 @@ fname = 'SOLER_Flare_catalogue'  # 'full_catalogue_with_stix_merged_with_cme'
 
 st.title('Flare catalogue')
 
+st.write('This catalogue contains solar flares with a flare class > M5 observed in solar cycle 25, including key characteristics of each flare. The flares in this catalogue were compiled using observation from two spacecraft: the Geostationary Operational Environmental Satellite (GOES) and Solar Orbiter (SolO).')
+
 t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 time_columns = [col for col in t_df.columns if 'Time' in col]
 

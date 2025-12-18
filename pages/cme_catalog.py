@@ -8,6 +8,8 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode #, StAggridThem
 
 st.title('CME catalogue')
 
+st.write('This catalogue contains coronal mass ejections (CMEs) with a speed > 1000 km/s obtained from the existing CME lists from the Large Angle and Spectrometric Coronagraph Experiment (LASCO) onboard Solar and Heliospheric Observatory (SOHO).')
+
 df_cme_org = pd.read_csv('catalogues/SOLER_CME_catalogue.csv', sep=',',
                     parse_dates=['Start Time (Observer)', 'Start time (1 AU)', 'Start time (Sun)'])
 
