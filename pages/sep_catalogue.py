@@ -105,7 +105,7 @@ cell_style_NaT = JsCode("""
 
 gb.configure_columns(column_names=date_columns, cellDataType='date', type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='yyyy-MM-dd', cellStyle=cell_style_NaT)
 
-for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No"]:
+for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No", "event number"]:
   if key in df_sep.columns:
     gb.configure_column(key, spanRows='true')
 
