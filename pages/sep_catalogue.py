@@ -14,9 +14,13 @@ t_df = pd.read_csv(f'catalogues/{fname}.csv', sep=',')
 datetime_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 date_columns = [col for col in t_df.columns if 'yyyy-mm-dd' in col]
 time_columns = [col for col in t_df.columns if 'HH:MM:SS' in col]
+intensity_columns = ['p25MeV peak flux', 'e1MeV peak flux', 'e100keV peak flux', 'e1MeV peak flux proxy', 'e100keV peak flux proxy']
 
 df_sep_org = pd.read_csv(f'catalogues/{fname}.csv', sep=',', parse_dates=datetime_columns)
 
+# Convert floats to strings formatted in scientific notation
+for key in intensity_columns:
+  df_sep_org[key] = df_sep_org[key].apply(lambda x: f"{x:.2e}")
 
 def store_value(my_key):
     # Copy the value to the permanent key
@@ -88,6 +92,19 @@ for key in df_sep.keys():
   gb.configure_column(key, tooltipField=str(key), headerTooltip=str(key))
 # gb.configure_column("flare_comments", header_name='Flare Comments', tooltipField='flare_comments', headerTooltip='Comments about flares', width=10)
 
+# Make nan values invisible without removing them
+cell_style_nan = JsCode("""
+    function(params) {
+        console.log(params.value);
+        if (params.value === 'nan') {
+            return {
+                'color':'rgb(0, 0, 0, 0.0)',
+                /// 'backgroundColor':'white'
+            }
+        }
+};
+""")
+gb.configure_columns(column_names=intensity_columns, cellStyle=cell_style_nan)
 
 # Make NaT values invisible without removing them
 cell_style_NaT = JsCode("""
@@ -101,16 +118,11 @@ cell_style_NaT = JsCode("""
         }
 };
 """)
-# gb.configure_columns(column_names=datetime_columns, cellStyle=cell_style_NaT)
-
 gb.configure_columns(column_names=date_columns, cellDataType='date', type=["dateColumnFilter", "customDateTimeFormat"], custom_format_string='yyyy-MM-dd', cellStyle=cell_style_NaT)
 
 for key in ["SEP_IDX", "FLARE_IDX", "CME_IDX", "Event No", "event number"]:
   if key in df_sep.columns:
     gb.configure_column(key, spanRows='true')
-
-
-
 
 gridOptions = gb.build() 
 gridOptions['rowSelection'] = 'single'  # 'multiple'  # 'single'
